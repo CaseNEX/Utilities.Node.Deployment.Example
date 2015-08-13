@@ -1,13 +1,12 @@
-// https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#list-of-all-json-declaration-fields-avaibles
 {
 	"apps": [{
 		"name": "HelloWorld",
 		"script": "/home/www/node/HelloWorld/index.js",
 		"args": [],
-		"instances": -1, //1 less than total cores
+		"instances": 0,
 		"watch": false,
-		"node_args": "--harmony",
 		"merge_logs": true,
+		"port": 3000,
 		"cwd": "/home/www/node/HelloWorld",
 		"exec_mode": "cluster_mode",
 		"log_date_format": "YYYY-MM-DD HH:mm Z",
