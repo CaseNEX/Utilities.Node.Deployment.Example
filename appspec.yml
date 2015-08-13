@@ -1,0 +1,37 @@
+# For help completing this file, see the "AppSpec File Reference" in the
+#   "AWS CodeDeploy User Guide" at
+#   http://docs.aws.amazon.com/codedeploy/latest/userguide/app-spec-ref.html
+version: 0.0
+os: linux
+files:
+  # copy entire app to build directory
+  - source: /
+    destination: /home/www/node/build/HelloWorld/
+permissions:
+  - object: /home/www/node/HelloWorld
+    type:
+      - directory
+    pattern: "**"
+    owner: www
+    group: www
+    mode: 750
+  - object: /home/www/node/HelloWorld
+    type:
+      - file
+    pattern: "**"
+    owner: www
+    group: www
+    mode: 640
+hooks:
+  BeforeInstall:
+    # ensure build directory exists
+    - location: deploy/BeforeInstall.sh
+      runas: www
+  AfterInstall:
+    # run build and move
+    - location: deploy/AfterInstall.sh
+      runas: www
+  ValidateService:
+    # make sure the app is running
+    - location: deploy/ValidateService.sh
+      runas: www
